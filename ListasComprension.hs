@@ -34,8 +34,39 @@ getDivisores n = [x|x<-[1..n], (mod n x) == 0]
 esPrimo n =
  if length (getDivisores n) == 2 
  then True
- else False
+ else False 
+
+
+
+diagPrin mss = [ (mss !!i)!!i | i<-[0..ultimaFila]]
+  where
+    ultimaFila= (length mss) -1
+
+diagSec mss = [(mss!!i)!!(tam-i) | i<-[0..tam]]
+ where
+ tam = (length mss) - 1
+
+
+diagPrin2 mss = snd(foldr f a mss)
+ where
+  a=(ultimaFila,[])
+  f fs (pos,rs)=(pos-1 ,(fs!!pos):rs)
+  ultimaFila=length mss -1
+
+{-
+f[1,2,3,4] (f [1,2,3,4] (f [1,2,3,4] (f[1,2,3,4]] [])))
+f[1,2,3,4] (f [1,2,3,4] (f [1,2,3,4] [4]] ))
+f[1,2,3,4] (f [1,2,3,4] ([3,4]] ))
+f[1,2,3,4] [2,3,4]
+[1,2,3,4]
+
+f[1,2,3,4] (f [1,2,3,4] (f [1,2,3,4] (f[1,2,3,4]] (3,[]))))
+f[1,2,3,4] (f [1,2,3,4] (f [1,2,3,4] (2,[4]) ))
+f[1,2,3,4] (f [1,2,3,4] (1,[3,4]] ))
+f[1,2,3,4] (0,[2,3,4])
+(-1,[1,2,3,4])
+-}
 
 --ej11
-matriz xss = [x|x<-y,[y|y<-xss]]
 
+reversa n = [n-x|x<-[0..n]]
